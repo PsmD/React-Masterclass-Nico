@@ -14,7 +14,7 @@ import Chart from "./Chart";
 import Price from "./Price";
 
 const Title = styled.h1`
-  font-size: 48px;
+  font-size: 25px;
   color: ${(props) => props.theme.accentColor};
 `;
 
@@ -34,6 +34,7 @@ const Header = styled.header`
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-right: 100px;
 `;
 
 const Overview = styled.div`
@@ -58,6 +59,24 @@ const OverviewItem = styled.div`
 const Description = styled.p`
   margin: 20px 0px;
 `;
+
+const BtnContainer = styled.div`
+  width: 30%;
+`;
+
+const BackBtn = styled.div`
+  width: 30px;
+  height: 30px;
+  display: flex;
+  background-color: ${(props) => props.theme.bgColor};
+  border: 1px solid ${(props) => props.theme.textColor};
+  color: ${(props) => props.theme.textColor};
+  justify-content: center;
+  align-items: center;
+  border-radius: 20px;
+  font-weight: 900;
+`;
+
 
 const Tabs = styled.div`
   display: grid;
@@ -168,6 +187,11 @@ function Coin({}: ICoinProps) {
         </title>
       </Helmet>
       <Header>
+      <BtnContainer>
+          <BackBtn>
+            <Link to="/">&larr;</Link>
+          </BackBtn>
+        </BtnContainer>
         <Title>
           {state?.name ? state.name : loading ? "Loading..." : infoData?.name}
         </Title>
@@ -213,7 +237,7 @@ function Coin({}: ICoinProps) {
 
           <Switch>
             <Route path={`/:coinId/price`}>
-              <Price />
+              <Price coinId={coinId} tickersData={tickersData} />
             </Route>
             <Route path={`/:coinId/chart`}>
             <Chart coinId={coinId} />
